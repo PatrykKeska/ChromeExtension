@@ -33,8 +33,48 @@ export const huForm = () => {
         },
         title: "Nő", // Female in Hungarian
       },
+      {
+        name: "Név",
+        surname: "Vezetéknév",
+        birthdate: {
+          day: "1",
+          month: "0",
+          year: "1990",
+        },
+        title: "Férfi", // Male in Hungarian
+      },
+      {
+        name: "Anna",
+        surname: "Nowak",
+        birthdate: {
+          day: "2",
+          month: "1",
+          year: "1985",
+        },
+        title: "Nő", // Female in Hungarian
+      },
     ],
     children: [
+      {
+        name: "Kasia",
+        surname: "Kowalska",
+        birthdate: {
+          day: "3",
+          month: "2",
+          year: "2015",
+        },
+        title: "Nő", // Female in Hungarian
+      },
+      {
+        name: "Piotr",
+        surname: "Kowalski",
+        birthdate: {
+          day: "4",
+          month: "3",
+          year: "2018",
+        },
+        title: "Férfi", // Male in Hungarian
+      },
       {
         name: "Kasia",
         surname: "Kowalska",
@@ -214,13 +254,4 @@ export const huForm = () => {
     );
     setSelectValue(`[data-testid="title-child-${index}"]`, child.title);
   });
-
-  // Select the button using its data-testid attribute
-  const button = document.querySelector(
-    '[data-testid="wizard-sidebar-next-button"]'
-  );
-
-  if (button) {
-    button.click();
-  }
 };

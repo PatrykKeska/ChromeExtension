@@ -33,8 +33,48 @@ export const lvForm = () => {
         },
         title: "Female",
       },
+      {
+        name: "Vardas",
+        surname: "Pavardė",
+        birthdate: {
+          day: "1",
+          month: "0",
+          year: "1990",
+        },
+        title: "Male",
+      },
+      {
+        name: "Anna",
+        surname: "Nowak",
+        birthdate: {
+          day: "2",
+          month: "1",
+          year: "1985",
+        },
+        title: "Female",
+      },
     ],
     children: [
+      {
+        name: "Kasia",
+        surname: "Kowalska",
+        birthdate: {
+          day: "3",
+          month: "2",
+          year: "2015",
+        },
+        title: "Female",
+      },
+      {
+        name: "Piotr",
+        surname: "Kowalski",
+        birthdate: {
+          day: "4",
+          month: "3",
+          year: "2018",
+        },
+        title: "Male",
+      },
       {
         name: "Kasia",
         surname: "Kowalska",
@@ -216,11 +256,4 @@ export const lvForm = () => {
   });
 
   // Select the button using its data-testid attribute
-  const button = document.querySelector(
-    '[data-testid="wizard-sidebar-next-button"]'
-  );
-
-  if (button) {
-    button.click();
-  }
 };

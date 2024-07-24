@@ -24,6 +24,10 @@ body {
   font-weight: bold;
 }
 
+.btn {
+  opacity: 0.7;
+}
+
 .btn-small {
   width: 100px;
 }

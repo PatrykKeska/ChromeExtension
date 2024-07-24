@@ -4,7 +4,8 @@
     <link rel="stylesheet" href="./styles/styles.css" />
     <link rel="stylesheet" href="./styles/tabs.css" />
     <link rel="stylesheet" href="./styles/switch.css" />
-    <link rel="stylesheet" href="./styles//featureFlags.css" />
+    <link rel="stylesheet" href="./styles/featureFlags.css" />
+    <link rel="stylesheet" href="./styles/suggested.css" />
   </head>
   <body>
     <div class="tabs">
@@ -13,30 +14,41 @@
     </div>
 
     <div id="Tab1" class="tabcontent">
-      <button class="btn btn-pl">Itaka PL</button>
-      <button class="btn btn-lv">Itaka LV</button>
-      <button class="btn btn-lt">Itaka LT</button>
-      <button class="btn btn-ee">Itaka EE</button>
-      <button class="btn btn-hu">Itaka HU</button>
-      <button class="btn btn-cz">Cedok CZ</button>
-      <button class="btn btn-sk">Cedok SK</button>
+      <div class="switch-wrapper">
+        <h3>Show only suggested</h3>
+        <label class="switch">
+          <input type="checkbox" id="suggestedSwitch" />
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <button id="pl" class="btn btn-pl">Itaka PL</button>
+      <button id="lv" class="btn btn-lv">Itaka LV</button>
+      <button id="lt" class="btn btn-lt">Itaka LT</button>
+      <button id="ee" class="btn btn-ee">Itaka EE</button>
+      <button id="hu" class="btn btn-hu">Itaka HU</button>
+      <button id="cz" class="btn btn-cz">Cedok CZ</button>
+      <button id="sk" class="btn btn-sk">Cedok SK</button>
       <div class="switch-wrapper">
         <h3>Go to services</h3>
         <label class="switch">
-          <input type="checkbox" id="step1Switch" />
+          <input type="checkbox" id="goToServicesSwitch" />
           <span class="slider round"></span>
         </label>
       </div>
       <div class="switch-wrapper">
         <h3>Go to payment</h3>
         <label class="switch">
-          <input type="checkbox" id="step2Switch" />
+          <input type="checkbox" id="goToPaymentSwitch" />
           <span class="slider round"></span>
         </label>
       </div>
-      <script type="module" src="popup.js"></script>
-      <script src="./js/tabs.js"></script>
-      <!-- <script type="module" src="./autofillForm.js"></script> -->
+      <div class="switch-wrapper">
+        <h3>Go to summary</h3>
+        <label class="switch">
+          <input type="checkbox" id="gotoSummarySwitch" />
+          <span class="slider round"></span>
+        </label>
+      </div>
     </div>
 
     <div id="Tab2" class="tabcontent">
@@ -49,10 +61,14 @@
         <button class="btn-small" id="saveButton">Save</button>
       </div>
     </div>
-
-    <script src="script.js"></script>
-    <script src="./js/tabs.js"></script>
-    <script src="./js/featureFlags.js"></script>
+    <script defer type="module" src="popup.js"></script>
+    <script defer type="module" src="./js/tabs.js"></script>
+    <script defer type="module" src="./js/featureFlags.js"></script>
+    <script defer type="module" src="./js/switch.js"></script>
+    <script defer type="module" src="./js/choosePayment.js"></script>
+    <script defer type="module" src="./js/nextStep.js"></script>
+    <script defer type="module" src="./js/skipFirstStep.js"></script>
+    <script defer type="module" src="./js/suggestedLang.js"></script>
     <!-- New JS file for Tab2 -->
   </body>
 </html>
