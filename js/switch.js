@@ -68,6 +68,7 @@ export function highlightButton(lang) {
     hu: "hu",
     cs: "cz",
     sk: "sk",
+    en: "en",
   };
 
   const btnId = langMap[lang] || lang;

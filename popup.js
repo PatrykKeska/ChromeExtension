@@ -9,6 +9,7 @@ import { switchStates } from "./js/switch.js";
 import { selectRandomPaymentMethod } from "./js/choosePayment.js";
 import { skipFirstStep } from "./js/skipFirstStep.js";
 import { nextStep } from "./js/nextStep.js";
+import { enForm } from "./tenants/en.js";
 
 const buttonFunctionMap = {
   "btn-pl": plForm,
@@ -18,6 +19,7 @@ const buttonFunctionMap = {
   "btn-hu": huForm,
   "btn-cz": czForm,
   "btn-sk": skForm,
+  "btn-en": enForm,
 };
 
 function executeInCurrentTab(func, args = []) {
@@ -93,7 +95,7 @@ async function handleButtonClick(buttonId, params) {
   );
 
   // Wait for a short time to allow for potential URL change
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 500));
 
   let currentUrl = await getCurrentTabUrl();
   console.log("Current URL after initial action:", currentUrl);
