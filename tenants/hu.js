@@ -1,103 +1,5 @@
-export const huForm = () => {
-  const formDataHU = {
-    "customer.name": "Név",
-    "customer.surname": "Vezetéknév",
-    birthdate: {
-      day: "1",
-      month: "0",
-      year: "1990",
-    },
-    "customer.phoneNumber": "60333111",
-    "customer.email": "nev.vezeteknev@example.com",
-    "customer.address": "Utca 123",
-    "customer.postCode": "1051",
-    "customer.city": "Budapest",
-    persons: [
-      {
-        name: "Név",
-        surname: "Vezetéknév",
-        birthdate: {
-          day: "1",
-          month: "0",
-          year: "1990",
-        },
-        title: "Férfi", // Male in Hungarian
-      },
-      {
-        name: "Anna",
-        surname: "Nowak",
-        birthdate: {
-          day: "2",
-          month: "1",
-          year: "1985",
-        },
-        title: "Nő", // Female in Hungarian
-      },
-      {
-        name: "Név",
-        surname: "Vezetéknév",
-        birthdate: {
-          day: "1",
-          month: "0",
-          year: "1990",
-        },
-        title: "Férfi", // Male in Hungarian
-      },
-      {
-        name: "Anna",
-        surname: "Nowak",
-        birthdate: {
-          day: "2",
-          month: "1",
-          year: "1985",
-        },
-        title: "Nő", // Female in Hungarian
-      },
-    ],
-    children: [
-      {
-        name: "Kasia",
-        surname: "Kowalska",
-        birthdate: {
-          day: "3",
-          month: "2",
-          year: "2015",
-        },
-        title: "Nő", // Female in Hungarian
-      },
-      {
-        name: "Piotr",
-        surname: "Kowalski",
-        birthdate: {
-          day: "4",
-          month: "3",
-          year: "2018",
-        },
-        title: "Férfi", // Male in Hungarian
-      },
-      {
-        name: "Kasia",
-        surname: "Kowalska",
-        birthdate: {
-          day: "3",
-          month: "2",
-          year: "2015",
-        },
-        title: "Nő", // Female in Hungarian
-      },
-      {
-        name: "Piotr",
-        surname: "Kowalski",
-        birthdate: {
-          day: "4",
-          month: "3",
-          year: "2018",
-        },
-        title: "Férfi", // Male in Hungarian
-      },
-    ],
-  };
-
+export const huForm = (formDataHU) => {
+  console.log("this is our params", formDataHU);
   const triggerEvents = (input) => {
     ["input", "change", "blur"].forEach((eventType) => {
       const event = new Event(eventType, { bubbles: true });
@@ -216,6 +118,20 @@ export const huForm = () => {
     `[data-testid="customer-birthdate-year"]`,
     formDataHU.birthdate.year
   );
+
+  if (
+    formDataHU &&
+    formDataHU.invoice &&
+    typeof formDataHU.invoice === "object"
+  ) {
+    for (const [key, value] of Object.entries(formDataHU.invoice)) {
+      if (value != null) {
+        setInputValue(`[name="${key}"]`, value);
+      }
+    }
+  } else {
+    console.warn("formData.invoice is not a valid object");
+  }
 
   // Fill form data for Persons/Adults
   formDataHU.persons.forEach((person, index) => {

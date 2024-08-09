@@ -1,103 +1,4 @@
-export const eeForm = () => {
-  const formDataLT = {
-    "customer.name": "Vardas",
-    "customer.surname": "Pavardė",
-    birthdate: {
-      day: "1",
-      month: "0",
-      year: "1990",
-    },
-    "customer.phoneNumber": "29991234", // Lithuanian phone number usually starts with +370
-    "customer.email": "vardas.pavarde@example.com",
-    "customer.address": "Gatvė 123",
-    "customer.postCode": "12345",
-    "customer.city": "Vilnius",
-    persons: [
-      {
-        name: "Vardas",
-        surname: "Pavardė",
-        birthdate: {
-          day: "1",
-          month: "0",
-          year: "1990",
-        },
-        title: "Male",
-      },
-      {
-        name: "Anna",
-        surname: "Nowak",
-        birthdate: {
-          day: "2",
-          month: "1",
-          year: "1985",
-        },
-        title: "Female",
-      },
-      {
-        name: "Vardas",
-        surname: "Pavardė",
-        birthdate: {
-          day: "1",
-          month: "0",
-          year: "1990",
-        },
-        title: "Male",
-      },
-      {
-        name: "Anna",
-        surname: "Nowak",
-        birthdate: {
-          day: "2",
-          month: "1",
-          year: "1985",
-        },
-        title: "Female",
-      },
-    ],
-    children: [
-      {
-        name: "Kasia",
-        surname: "Kowalska",
-        birthdate: {
-          day: "3",
-          month: "2",
-          year: "2015",
-        },
-        title: "Female",
-      },
-      {
-        name: "Piotr",
-        surname: "Kowalski",
-        birthdate: {
-          day: "4",
-          month: "3",
-          year: "2018",
-        },
-        title: "Male",
-      },
-      {
-        name: "Kasia",
-        surname: "Kowalska",
-        birthdate: {
-          day: "3",
-          month: "2",
-          year: "2015",
-        },
-        title: "Female",
-      },
-      {
-        name: "Piotr",
-        surname: "Kowalski",
-        birthdate: {
-          day: "4",
-          month: "3",
-          year: "2018",
-        },
-        title: "Male",
-      },
-    ],
-  };
-
+export const eeForm = (formDataLT) => {
   const triggerEvents = (input) => {
     ["input", "change", "blur"].forEach((eventType) => {
       const event = new Event(eventType, { bubbles: true });
@@ -216,6 +117,20 @@ export const eeForm = () => {
     `[data-testid="customer-birthdate-year"]`,
     formDataLT.birthdate.year
   );
+
+  if (
+    formDataLT &&
+    formDataLT.invoice &&
+    typeof formDataLT.invoice === "object"
+  ) {
+    for (const [key, value] of Object.entries(formDataLT.invoice)) {
+      if (value != null) {
+        setInputValue(`[name="${key}"]`, value);
+      }
+    }
+  } else {
+    console.warn("formData.invoice is not a valid object");
+  }
 
   // Fill form data for Persons/Adults
   formDataLT.persons.forEach((person, index) => {

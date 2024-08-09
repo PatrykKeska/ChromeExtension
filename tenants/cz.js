@@ -1,103 +1,4 @@
-export const czForm = () => {
-  const formDataCZ = {
-    "customer.name": "Jan",
-    "customer.surname": "Kowalski",
-    birthdate: {
-      day: "1",
-      month: "0",
-      year: "1990",
-    },
-    "customer.phoneNumber": "522333111",
-    "customer.email": "jan.kowalski@example.com",
-    "customer.address": "Ulica 123",
-    "customer.postCode": "81000",
-    "customer.city": "Bratislava",
-    persons: [
-      {
-        name: "Jan",
-        surname: "Kowalski",
-        birthdate: {
-          day: "1",
-          month: "0",
-          year: "1990",
-        },
-        title: "Male",
-      },
-      {
-        name: "Anna",
-        surname: "Nowak",
-        birthdate: {
-          day: "2",
-          month: "1",
-          year: "1985",
-        },
-        title: "Female",
-      },
-      {
-        name: "Jan",
-        surname: "Kowalski",
-        birthdate: {
-          day: "1",
-          month: "0",
-          year: "1990",
-        },
-        title: "Male",
-      },
-      {
-        name: "Anna",
-        surname: "Nowak",
-        birthdate: {
-          day: "2",
-          month: "1",
-          year: "1985",
-        },
-        title: "Female",
-      },
-    ],
-    children: [
-      {
-        name: "Kasia",
-        surname: "Kowalska",
-        birthdate: {
-          day: "3",
-          month: "2",
-          year: "2015",
-        },
-        title: "Female",
-      },
-      {
-        name: "Piotr",
-        surname: "Kowalski",
-        birthdate: {
-          day: "4",
-          month: "3",
-          year: "2018",
-        },
-        title: "Male",
-      },
-      {
-        name: "Kasia",
-        surname: "Kowalska",
-        birthdate: {
-          day: "3",
-          month: "2",
-          year: "2015",
-        },
-        title: "Female",
-      },
-      {
-        name: "Piotr",
-        surname: "Kowalski",
-        birthdate: {
-          day: "4",
-          month: "3",
-          year: "2018",
-        },
-        title: "Male",
-      },
-    ],
-  };
-
+export const czForm = (formDataCZ) => {
   const triggerEvents = (input) => {
     ["input", "change", "blur"].forEach((eventType) => {
       const event = new Event(eventType, { bubbles: true });
@@ -217,6 +118,20 @@ export const czForm = () => {
     `[data-testid="customer-birthdate-year"]`,
     formDataCZ.birthdate.year
   );
+
+  if (
+    formDataCZ &&
+    formDataCZ.invoice &&
+    typeof formDataCZ.invoice === "object"
+  ) {
+    for (const [key, value] of Object.entries(formDataCZ.invoice)) {
+      if (value != null) {
+        setInputValue(`[name="${key}"]`, value);
+      }
+    }
+  } else {
+    console.warn("formData.invoice is not a valid object");
+  }
 
   // Fill form data for Persons/Adults
   formDataCZ.persons.forEach((person, index) => {

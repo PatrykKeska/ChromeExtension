@@ -1,105 +1,5 @@
-export function plForm() {
-  // Define the form data for both persons and children
-  const formData = {
-    "customer.name": "Jan",
-    "customer.surname": "Kowalski",
-    birthdate: {
-      day: "1",
-      month: "0",
-      year: "1990",
-    },
-    "customer.phoneNumber": "123456789",
-    "customer.email": "jan.kowalski@example.com",
-    "customer.address": "Ulica 123",
-    "customer.postCode": "12-345",
-    "customer.city": "Miasto",
-    invoice: {
-      "invoice.taxIdentifier": "1234567890",
-      "invoice.companyName": "Firma Sp. z o.o.",
-    },
-    persons: [
-      {
-        name: "Jan",
-        surname: "Kowalski",
-        birthdate: {
-          day: "1",
-          month: "0",
-          year: "1990",
-        },
-        title: "Male",
-      },
-      {
-        name: "Anna",
-        surname: "Nowak",
-        birthdate: {
-          day: "2",
-          month: "1",
-          year: "1985",
-        },
-        title: "Female",
-      },
-      {
-        name: "Jan",
-        surname: "Kowalski",
-        birthdate: {
-          day: "1",
-          month: "0",
-          year: "1990",
-        },
-        title: "Male",
-      },
-      {
-        name: "Anna",
-        surname: "Nowak",
-        birthdate: {
-          day: "2",
-          month: "1",
-          year: "1985",
-        },
-        title: "Female",
-      },
-    ],
-    children: [
-      {
-        name: "Kasia",
-        surname: "Kowalska",
-        birthdate: {
-          day: "3",
-          month: "2",
-          year: "2015",
-        },
-      },
-      {
-        name: "Piotr",
-        surname: "Kowalski",
-        birthdate: {
-          day: "4",
-          month: "3",
-          year: "2018",
-        },
-      },
-      {
-        name: "Kasia",
-        surname: "Kowalska",
-        birthdate: {
-          day: "3",
-          month: "2",
-          year: "2015",
-        },
-      },
-      {
-        name: "Piotr",
-        surname: "Kowalski",
-        birthdate: {
-          day: "4",
-          month: "3",
-          year: "2018",
-        },
-      },
-    ],
-  };
-
-  // Helper functions...
+export function plForm(formData) {
+  console.log("this is our params", formData);
 
   const triggerEvents = (input) => {
     const events = ["input", "change", "blur"];
@@ -226,9 +126,14 @@ export function plForm() {
     formData.birthdate.year
   );
 
-  // Fill Invoice Inputs
-  for (const [key, value] of Object.entries(formData.invoice)) {
-    setInputValue(`[name="${key}"]`, value);
+  if (formData && formData.invoice && typeof formData.invoice === "object") {
+    for (const [key, value] of Object.entries(formData.invoice)) {
+      if (value != null) {
+        setInputValue(`[name="${key}"]`, value);
+      }
+    }
+  } else {
+    console.warn("formData.invoice is not a valid object");
   }
 
   // Fill form data for Persons/Adults

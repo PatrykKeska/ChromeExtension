@@ -10,6 +10,7 @@ import { selectRandomPaymentMethod } from "./js/choosePayment.js";
 import { skipFirstStep } from "./js/skipFirstStep.js";
 import { nextStep } from "./js/nextStep.js";
 import { enForm } from "./tenants/en.js";
+import { formsData } from "./js/formEditor.js";
 
 const buttonFunctionMap = {
   "btn-pl": plForm,
@@ -83,16 +84,15 @@ async function executeAndWaitForUrlChange(func, params, expectedUrl) {
   return newUrl;
 }
 
-async function handleButtonClick(buttonId, params) {
+async function handleButtonClick(buttonId, formData) {
   console.log("Button clicked:", buttonId);
   let initialUrl = await getCurrentTabUrl();
   console.log("Initial URL:", initialUrl);
 
+  // Ensure we have the latest form data
+
   // Initial form filling
-  await executeInCurrentTab(
-    buttonFunctionMap[buttonId],
-    params ? [params] : []
-  );
+  await executeInCurrentTab(buttonFunctionMap[buttonId], [formData]);
 
   // Wait for a short time to allow for potential URL change
   await new Promise((resolve) => setTimeout(resolve, 500));
@@ -103,10 +103,7 @@ async function handleButtonClick(buttonId, params) {
   // If URL hasn't changed, trigger another click
   if (currentUrl === initialUrl) {
     console.log("URL didn't change, triggering another click");
-    await executeInCurrentTab(
-      buttonFunctionMap[buttonId],
-      params ? [params] : []
-    );
+    await executeInCurrentTab(buttonFunctionMap[buttonId], [formData]);
     currentUrl = await getCurrentTabUrl();
     console.log("Current URL after second click:", currentUrl);
   }
@@ -162,13 +159,31 @@ async function handleButtonClick(buttonId, params) {
   console.log("Process completed. Final URL:", currentUrl);
 }
 
-Object.keys(buttonFunctionMap).forEach((buttonId) => {
-  const button = document.querySelector(`.${buttonId}`);
-  if (button) {
-    button.addEventListener("click", () =>
-      handleButtonClick(buttonId, {
-        switchStates,
-      })
-    );
-  }
+// Wait for the DOM to be fully loaded
+document.addEventListener("DOMContentLoaded", () => {
+  // Ensure formsData is up-to-date when the DOM loads
+
+  // Map of button IDs to language codes
+  const buttonLangMap = {
+    "btn-pl": "pl",
+    "btn-lv": "lv",
+    "btn-lt": "lt",
+    "btn-ee": "ee",
+    "btn-hu": "hu",
+    "btn-cz": "cz",
+    "btn-sk": "sk",
+    "btn-en": "en",
+  };
+
+  Object.keys(buttonFunctionMap).forEach((buttonId) => {
+    const button = document.querySelector(`.${buttonId}`);
+    if (button) {
+      button.addEventListener("click", () => {
+        const lang = buttonLangMap[buttonId];
+        // Get the latest form data
+        const formData = JSON.parse(JSON.stringify(formsData[lang]));
+        handleButtonClick(buttonId, formData);
+      });
+    }
+  });
 });

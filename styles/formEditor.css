@@ -1,0 +1,155 @@
+.form-editor {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #1f2937; /* Dark background */
+  color: #e5e7eb; /* Light text color */
+  padding-bottom: 500px;
+}
+
+.form-editor__title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #f3f4f6; /* Lighter color for better contrast */
+}
+
+.form-editor__section-title {
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #a78bfa; /* Light purple for section titles */
+}
+
+.form-editor__label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #a78bfa; /* Light purple for labels */
+}
+
+.form-editor__person-title {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #a78bfa; /* Light purple for person titles */
+}
+
+.form-editor__input {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #4b5563; /* Darker border */
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-color: #374151; /* Darker input background */
+  color: #e5e7eb; /* Light text color */
+}
+
+.form-editor__birthdate-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.form-editor__input--birthdate {
+  width: calc(33.33% - 7px);
+  margin-bottom: 0;
+}
+
+.form-editor__button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: #7c3aed; /* Brighter purple for buttons */
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s;
+  border-radius: 5px;
+}
+
+.form-editor__button:hover,
+.form-editor__button--submit:hover {
+  background-color: #8b5cf6; /* Lighter purple on hover */
+}
+
+.form-editor__dynamic-container {
+  margin-top: 10px;
+}
+
+details {
+  border: 1px solid #6d28d9; /* Darker purple border */
+  padding: 0.5em 0.5em 0;
+  width: 100%;
+  margin-bottom: 10px;
+  transition: all 0.3s ease-in-out;
+  background-color: #2d3748; /* Slightly lighter than main background */
+}
+
+summary {
+  font-weight: bold;
+  margin: -0.5em -0.5em 0;
+  padding: 0.5em;
+  background-color: #4c1d95; /* Dark purple for summary */
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  height: 20px;
+}
+
+summary:hover {
+  background-color: #7c3aed; /* Lighter purple on hover */
+}
+
+details[open] {
+  padding: 0.5em;
+  background-color: #374151; /* Darker background when open */
+}
+
+details[open] summary {
+  border-bottom: 1px solid #6d28d9;
+  background-color: #7c3aed;
+  margin-bottom: 0.5em;
+}
+
+details[open] > *:not(summary) {
+  animation: sweep 0.3s ease-in-out;
+}
+
+@keyframes sweep {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .form-editor {
+    padding: 10px;
+  }
+
+  .form-editor__input,
+  .form-editor__button {
+    font-size: 14px;
+  }
+
+  .form-editor__birthdate-group {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .form-editor__input--birthdate {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+}
+
+#Tab3 {
+  width: 100%;
+}

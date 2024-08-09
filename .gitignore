@@ -1,0 +1,6 @@
+# Ignore the backup folder and all its contents
+/backup/
+
+# Ignore all .bak files in the backup folder
+/backup/**/*
+
