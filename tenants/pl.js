@@ -1,6 +1,4 @@
 export function plForm(formData) {
-  console.log("this is our params", formData);
-
   const triggerEvents = (input) => {
     const events = ["input", "change", "blur"];
     events.forEach((eventType) => {

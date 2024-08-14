@@ -17,8 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
       input.checked = switchStates[switchId];
 
       input.addEventListener("change", function () {
-        switchStates[switchId] = this.checked;
-        localStorage.setItem(switchId, switchStates[switchId]);
+        updateSwitchStates(switchId, this.checked);
         updateButtonVisibility();
       });
     }
@@ -30,6 +29,37 @@ document.addEventListener("DOMContentLoaded", function () {
   // Detect language and highlight button
   detectAndHighlight();
 });
+
+function updateSwitchStates(switchId, checked) {
+  switch (switchId) {
+    case "gotoSummarySwitch":
+      switchStates["goToServicesSwitch"] = true;
+      switchStates["goToPaymentSwitch"] = true;
+      switchStates["gotoSummarySwitch"] = checked;
+      break;
+    case "goToPaymentSwitch":
+      switchStates["goToServicesSwitch"] = true;
+      switchStates["goToPaymentSwitch"] = checked;
+      switchStates["gotoSummarySwitch"] = false;
+      break;
+    case "goToServicesSwitch":
+      switchStates["goToServicesSwitch"] = checked;
+      switchStates["goToPaymentSwitch"] = false;
+      switchStates["gotoSummarySwitch"] = false;
+      break;
+    default:
+      switchStates[switchId] = checked;
+  }
+
+  // Update localStorage and checkbox states
+  for (const id in switchStates) {
+    localStorage.setItem(id, switchStates[id]);
+    const input = document.getElementById(id);
+    if (input) {
+      input.checked = switchStates[id];
+    }
+  }
+}
 
 function detectAndHighlight(retries = 3) {
   detectLanguage((lang) => {

@@ -1,5 +1,4 @@
 export const ltForm = (formDataLT) => {
-  console.log("this is our params", formDataLT);
   const triggerEvents = (input) => {
     ["input", "change", "blur"].forEach((eventType) => {
       const event = new Event(eventType, { bubbles: true });

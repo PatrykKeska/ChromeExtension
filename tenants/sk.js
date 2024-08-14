@@ -1,5 +1,4 @@
 export const skForm = (formDataSK) => {
-  console.log("this is our params", formDataSK);
   const triggerEvents = (input) => {
     ["input", "change", "blur"].forEach((eventType) => {
       const event = new Event(eventType, { bubbles: true });

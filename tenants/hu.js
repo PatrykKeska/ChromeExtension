@@ -1,5 +1,4 @@
 export const huForm = (formDataHU) => {
-  console.log("this is our params", formDataHU);
   const triggerEvents = (input) => {
     ["input", "change", "blur"].forEach((eventType) => {
       const event = new Event(eventType, { bubbles: true });
