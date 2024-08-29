@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="./styles/featureFlags.css" />
     <link rel="stylesheet" href="./styles/suggested.css" />
     <link rel="stylesheet" href="./styles/formEditor.css" />
+    <link rel="stylesheet" href="./styles/toLocalhost.css" />
   </head>
   <body>
     <div class="tabs">
-      <button class="tablinks" data-tab="Tab1">Autofill Booking Form</button>
+      <button class="tablinks" data-tab="Tab1">Autofill</button>
       <button class="tablinks" data-tab="Tab2">Feature flags</button>
-      <button class="tablinks" data-tab="Tab3">Forms Configuration</button>
+      <button class="tablinks" data-tab="Tab4">Switch to localhost</button>
+      <button class="tablinks" data-tab="Tab3">Settings</button>
     </div>
 
     <div id="Tab1" class="tabcontent">
@@ -65,6 +67,20 @@
       </div>
     </div>
     <div id="Tab3" class="tabcontent"></div>
+    <div id="Tab5" class="tabcontent">
+
+    </div>
+    <div id="Tab4" class="tabcontent">
+      <button id="localhost" class="btn-regular">Move to localhost</button>
+      <div class="switch-wrapper">
+        <h3>Open in a new tab</h3>
+        <label class="switch">
+          <input type="checkbox" id="localhostSwitch" />
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+
 
     <script defer type="module" src="popup.js"></script>
     <script defer type="module" src="./js/tabs.js"></script>
@@ -76,6 +92,8 @@
     <script defer type="module" src="./js/suggestedLang.js"></script>
     <script defer type="module" src="./js/formEditorHtml.js"></script>
     <script defer type="module" src="./js/formEditor.js"></script>
+    <script defer type="module" src="./js/toLocalhost.js"></script>
+
 
     <!-- New JS file for Tab2 -->
   </body>
