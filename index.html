@@ -1,100 +1,111 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="./styles/styles.css" />
-    <link rel="stylesheet" href="./styles/tabs.css" />
-    <link rel="stylesheet" href="./styles/switch.css" />
-    <link rel="stylesheet" href="./styles/featureFlags.css" />
-    <link rel="stylesheet" href="./styles/suggested.css" />
-    <link rel="stylesheet" href="./styles/formEditor.css" />
-    <link rel="stylesheet" href="./styles/toLocalhost.css" />
-  </head>
-  <body>
-    <div class="tabs">
-      <button class="tablinks" data-tab="Tab1">Autofill</button>
-      <button class="tablinks" data-tab="Tab2">Feature flags</button>
-      <button class="tablinks" data-tab="Tab4">Switch to localhost</button>
-      <button class="tablinks" data-tab="Tab3">Settings</button>
-    </div>
+<head>
+    <link href="./styles/styles.css" rel="stylesheet"/>
+    <link href="./styles/tabs.css" rel="stylesheet"/>
+    <link href="./styles/switch.css" rel="stylesheet"/>
+    <link href="./styles/featureFlags.css" rel="stylesheet"/>
+    <link href="./styles/suggested.css" rel="stylesheet"/>
+    <link href="./styles/formEditor.css" rel="stylesheet"/>
+    <link href="./styles/toLocalhost.css" rel="stylesheet"/>
+    <link href="./styles/loader.css" rel="stylesheet"/>
 
-    <div id="Tab1" class="tabcontent">
-      <div class="switch-wrapper">
+</head>
+<body>
+<div class="loader" style="display: none;">
+    <div class="spinner"></div>
+    <h2 class="processing-text">Processing</h2>
+</div>
+
+
+<div class="tabs">
+    <button class="tablinks" data-tab="Tab1">Autofill</button>
+    <button class="tablinks" data-tab="Tab2">Feature flags</button>
+    <button class="tablinks" data-tab="Tab4">Switch to localhost</button>
+    <button class="tablinks" data-tab="Tab3">Settings</button>
+</div>
+
+<div class="tabcontent" id="Tab1">
+    <div class="switch-wrapper">
         <h3>Show only suggested</h3>
         <label class="switch">
-          <input type="checkbox" id="suggestedSwitch" />
-          <span class="slider round"></span>
+            <input id="suggestedSwitch" type="checkbox"/>
+            <span class="slider round"></span>
         </label>
-      </div>
-      <button id="pl" class="btn btn-pl">PL</button>
-      <button id="lv" class="btn btn-lv">LV</button>
-      <button id="lt" class="btn btn-lt">LT</button>
-      <button id="ee" class="btn btn-ee">EE</button>
-      <button id="hu" class="btn btn-hu">HU</button>
-      <button id="cz" class="btn btn-cz">CZ</button>
-      <button id="sk" class="btn btn-sk">SK</button>
-      <button id="en" class="btn btn-en">EN</button>
-      <div class="switch-wrapper">
+    </div>
+    <button class="btn btn-pl" id="pl">PL</button>
+    <button class="btn btn-lv" id="lv">LV</button>
+    <button class="btn btn-lt" id="lt">LT</button>
+    <button class="btn btn-ee" id="ee">EE</button>
+    <button class="btn btn-hu" id="hu">HU</button>
+    <button class="btn btn-cz" id="cz">CZ</button>
+    <button class="btn btn-sk" id="sk">SK</button>
+    <button class="btn btn-en" id="en">EN</button>
+    <div class="switch-wrapper">
         <h3>Go to services</h3>
         <label class="switch">
-          <input type="checkbox" id="goToServicesSwitch" />
-          <span class="slider round"></span>
+            <input id="goToServicesSwitch" type="checkbox"/>
+            <span class="slider round"></span>
         </label>
-      </div>
-      <div class="switch-wrapper">
+    </div>
+    <div class="switch-wrapper">
         <h3>Go to payment</h3>
         <label class="switch">
-          <input type="checkbox" id="goToPaymentSwitch" />
-          <span class="slider round"></span>
+            <input id="goToPaymentSwitch" type="checkbox"/>
+            <span class="slider round"></span>
         </label>
-      </div>
-      <div class="switch-wrapper">
+    </div>
+    <div class="switch-wrapper">
         <h3>Go to summary</h3>
         <label class="switch">
-          <input type="checkbox" id="gotoSummarySwitch" />
-          <span class="slider round"></span>
+            <input id="gotoSummarySwitch" type="checkbox"/>
+            <span class="slider round"></span>
         </label>
-      </div>
     </div>
+</div>
 
-    <div id="Tab2" class="tabcontent">
-      <div class="input-wrapper">
+<div class="tabcontent" id="Tab2">
+    <div class="input-wrapper">
         <input
-          type="text"
-          id="userInput"
-          placeholder="Enter feature flag name"
+                id="userInput"
+                placeholder="Enter feature flag name"
+                type="text"
         />
         <button class="btn-small" id="saveButton">Save</button>
-      </div>
     </div>
-    <div id="Tab3" class="tabcontent"></div>
-    <div id="Tab5" class="tabcontent">
+</div>
+<div class="tabcontent" id="Tab3"></div>
+<div class="tabcontent" id="Tab5">
 
-    </div>
-    <div id="Tab4" class="tabcontent">
-      <button id="localhost" class="btn-regular">Move to localhost</button>
-      <div class="switch-wrapper">
+</div>
+<div class="tabcontent" id="Tab4">
+    <button class="btn-regular" id="localhost">Move to localhost</button>
+    <div class="switch-wrapper">
         <h3>Open in a new tab</h3>
         <label class="switch">
-          <input type="checkbox" id="localhostSwitch" />
-          <span class="slider round"></span>
+            <input id="localhostSwitch" type="checkbox"/>
+            <span class="slider round"></span>
         </label>
-      </div>
     </div>
+    <i style="color: #cccccc; margin-top: 20px; text-align: center; padding: 0 20px;">Easily move current page from
+        production or stage to localhost. Works
+        for booking and offers</i>
+</div>
 
 
-    <script defer type="module" src="popup.js"></script>
-    <script defer type="module" src="./js/tabs.js"></script>
-    <script defer type="module" src="./js/featureFlags.js"></script>
-    <script defer type="module" src="./js/switch.js"></script>
-    <script defer type="module" src="./js/choosePayment.js"></script>
-    <script defer type="module" src="./js/nextStep.js"></script>
-    <script defer type="module" src="./js/skipFirstStep.js"></script>
-    <script defer type="module" src="./js/suggestedLang.js"></script>
-    <script defer type="module" src="./js/formEditorHtml.js"></script>
-    <script defer type="module" src="./js/formEditor.js"></script>
-    <script defer type="module" src="./js/toLocalhost.js"></script>
+<script defer src="popup.js" type="module"></script>
+<script defer src="./js/tabs.js" type="module"></script>
+<script defer src="./js/featureFlags.js" type="module"></script>
+<script defer src="./js/switch.js" type="module"></script>
+<script defer src="./js/choosePayment.js" type="module"></script>
+<script defer src="./js/nextStep.js" type="module"></script>
+<script defer src="./js/skipFirstStep.js" type="module"></script>
+<script defer src="./js/suggestedLang.js" type="module"></script>
+<script defer src="./js/formEditorHtml.js" type="module"></script>
+<script defer src="./js/formEditor.js" type="module"></script>
+<script defer src="./js/toLocalhost.js" type="module"></script>
 
 
-    <!-- New JS file for Tab2 -->
-  </body>
+<!-- New JS file for Tab2 -->
+</body>
 </html>
