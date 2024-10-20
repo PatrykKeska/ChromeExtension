@@ -168,5 +168,6 @@ export const skForm = (formDataSK) => {
       child.birthdate.year
     );
     setSelectValue(`[data-testid="title-child-${index}}"]`, child.title); // there is no typo here it should be }
+    setSelectValue(`[data-testid="title-child-${index}}"]`, child.gender);
   });
 };

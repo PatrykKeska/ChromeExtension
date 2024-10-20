@@ -175,5 +175,6 @@ export function enForm(formData) {
       `[data-testid="children-${index}-birthdate-year"]`,
       child.birthdate.year
     );
+    setSelectValue(`[data-testid="title-child-${index}}"]`, child.gender);
   });
 }

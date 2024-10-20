@@ -168,5 +168,6 @@ export const huForm = (formDataHU) => {
       child.birthdate.year
     );
     setSelectValue(`[data-testid="title-child-${index}"]`, child.title);
+    setSelectValue(`[data-testid="title-child-${index}}"]`, child.gender);
   });
 };

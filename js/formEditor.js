@@ -45,8 +45,9 @@ const defaultConfigs = {
         birthdate: {
           day: "3",
           month: "2",
-          year: "2015",
+          year: "2024",
         },
+        gender: "Female",
       },
       {
         name: "Piotr",
@@ -54,8 +55,9 @@ const defaultConfigs = {
         birthdate: {
           day: "4",
           month: "3",
-          year: "2018",
+          year: "2024",
         },
+        gender: "Male",
       },
     ],
   },
@@ -105,9 +107,9 @@ const defaultConfigs = {
         birthdate: {
           day: "3",
           month: "2",
-          year: "2015",
+          year: "2024",
         },
-        title: "Female",
+        gender: "Female",
       },
       {
         name: "Piotr",
@@ -115,9 +117,9 @@ const defaultConfigs = {
         birthdate: {
           day: "4",
           month: "3",
-          year: "2018",
+          year: "2024",
         },
-        title: "Male",
+        gender: "Male",
       },
     ],
   },
@@ -167,9 +169,9 @@ const defaultConfigs = {
         birthdate: {
           day: "3",
           month: "2",
-          year: "2015",
+          year: "2024",
         },
-        title: "Female",
+        gender: "Female",
       },
       {
         name: "Piotr",
@@ -177,9 +179,9 @@ const defaultConfigs = {
         birthdate: {
           day: "4",
           month: "3",
-          year: "2018",
+          year: "2024",
         },
-        title: "Male",
+        gender: "Male",
       },
     ],
   },
@@ -229,9 +231,9 @@ const defaultConfigs = {
         birthdate: {
           day: "3",
           month: "2",
-          year: "2015",
+          year: "2024",
         },
-        title: "Female",
+        gender: "Female",
       },
       {
         name: "Piotr",
@@ -239,9 +241,9 @@ const defaultConfigs = {
         birthdate: {
           day: "4",
           month: "3",
-          year: "2018",
+          year: "2024",
         },
-        title: "Male",
+        gender: "Male",
       },
     ],
   },
@@ -291,9 +293,9 @@ const defaultConfigs = {
         birthdate: {
           day: "3",
           month: "2",
-          year: "2015",
+          year: "2024",
         },
-        title: "Nő",
+        gender: "Female",
       },
       {
         name: "Piotr",
@@ -301,9 +303,9 @@ const defaultConfigs = {
         birthdate: {
           day: "4",
           month: "3",
-          year: "2018",
+          year: "2024",
         },
-        title: "Férfi",
+        gender: "Male",
       },
     ],
   },
@@ -353,9 +355,9 @@ const defaultConfigs = {
         birthdate: {
           day: "3",
           month: "2",
-          year: "2015",
+          year: "2024",
         },
-        title: "Female",
+        gender: "Female",
       },
       {
         name: "Piotr",
@@ -363,9 +365,9 @@ const defaultConfigs = {
         birthdate: {
           day: "4",
           month: "3",
-          year: "2018",
+          year: "2024",
         },
-        title: "Male",
+        gender: "Male",
       },
     ],
   },
@@ -415,9 +417,9 @@ const defaultConfigs = {
         birthdate: {
           day: "3",
           month: "2",
-          year: "2015",
+          year: "2024",
         },
-        title: "Female",
+        gender: "Female",
       },
       {
         name: "Piotr",
@@ -425,9 +427,9 @@ const defaultConfigs = {
         birthdate: {
           day: "4",
           month: "3",
-          year: "2018",
+          year: "2024",
         },
-        title: "Male",
+        gender: "Male",
       },
     ],
   },
@@ -477,8 +479,9 @@ const defaultConfigs = {
         birthdate: {
           day: "3",
           month: "2",
-          year: "2015",
+          year: "2024",
         },
+        gender: "Female",
       },
       {
         name: "Piotr",
@@ -486,8 +489,9 @@ const defaultConfigs = {
         birthdate: {
           day: "4",
           month: "3",
-          year: "2018",
+          year: "2024",
         },
+        gender: "Male",
       },
     ],
   },
@@ -669,6 +673,7 @@ function getPersonsOrChildren(lang, type) {
   for (let i = 0; i < elements.length; i++) {
     const item = {};
     const inputs = elements[i].getElementsByTagName("input");
+    const selects = elements[i].getElementsByTagName("select");
     for (let input of inputs) {
       const nameParts = input.name.split(".");
       if (nameParts.length === 2) {
@@ -676,6 +681,12 @@ function getPersonsOrChildren(lang, type) {
       } else if (nameParts.length === 3) {
         if (!item.birthdate) item.birthdate = {};
         item.birthdate[nameParts[2]] = input.value;
+      }
+    }
+    for (let select of selects) {
+      const nameParts = select.name.split(".");
+      if (nameParts.length === 2) {
+        item[nameParts[1]] = select.value;
       }
     }
     items.push(item);
@@ -731,6 +742,11 @@ function populateForm(lang) {
           const input = form.querySelector(`[name="${invoiceKey}"]`);
           if (input) input.value = invoiceValue;
         }
+      } else if (key === "birthdate") {
+        for (const [dateKey, dateValue] of Object.entries(value)) {
+          const input = form.querySelector(`[name="${key}.${dateKey}"]`);
+          if (input) input.value = dateValue;
+        }
       } else {
         for (const [nestedKey, nestedValue] of Object.entries(value)) {
           const input = form.querySelector(`[name="${key}.${nestedKey}"]`);
@@ -783,13 +799,21 @@ function createPersonElement(person, index, type, lang) {
       </div>
     </div>
     ${
-      type === "persons"
+      type === "children"
         ? `
     <div class="form-editor__input-group">
-      <label for="${lang}-${type}-${index}-title" class="form-editor__label">Title:</label>
-      <input type="text" id="${lang}-${type}-${index}-title" name="${type}.title" value="${
-            person.title || ""
-          }" class="form-editor__input">
+      <label for="${lang}-${type}-${index}-gender" class="form-editor__label">Gender:</label>
+      <select id="${lang}-${type}-${index}-gender" name="${type}.gender" class="form-editor__input">
+        <option value="" disabled ${
+          !person.gender ? "selected" : ""
+        }>Select gender</option>
+        <option value="Male" ${
+          person.gender === "Male" ? "selected" : ""
+        }>Boy</option>
+        <option value="Female" ${
+          person.gender === "Female" ? "selected" : ""
+        }>Girl</option>
+      </select>
     </div>
     `
         : ""
